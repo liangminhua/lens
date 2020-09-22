@@ -72,7 +72,7 @@ export class InstallChartStore extends DockTabStore<IChartInstallData> {
 export const installChartStore = new InstallChartStore();
 
 export function createInstallChartTab(chart: HelmChart, tabParams: Partial<IDockTab> = {}) {
-  const { name, repo, version } = chart;
+  const { name, repo, version, description } = chart;
 
   const tab = dockStore.createTab({
     kind: TabKind.INSTALL_CHART,
@@ -86,7 +86,7 @@ export function createInstallChartTab(chart: HelmChart, tabParams: Partial<IDock
     version,
     namespace: "default",
     releaseName: "",
-    description: "",
+    description,
   });
 
   return tab;

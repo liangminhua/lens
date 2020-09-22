@@ -9,6 +9,7 @@ import { InfoPanel } from "./info-panel";
 import { Badge } from "../badge";
 import { NamespaceSelect } from "../+namespaces/namespace-select";
 import { autobind, prevDefault } from "../../utils";
+import { MarkdownViewer } from "../markdown-viewer";
 import { IChartInstallData, installChartStore } from "./install-chart.store";
 import { Spinner } from "../spinner";
 import { Icon } from "../icon";
@@ -108,14 +109,14 @@ export class InstallChart extends Component<Props> {
   render() {
     const { tabId, chartData, values, versions, install } = this;
     if (!chartData || chartData.values === undefined || !versions) {
-      return <Spinner center/>;
+      return <Spinner center />;
     }
 
     if (this.releaseDetails) {
       return (
         <div className="InstallChartDone flex column gaps align-center justify-center">
           <p>
-            <Icon material="check" big sticker/>
+            <Icon material="check" big sticker />
           </p>
           <p><Trans>Installation complete!</Trans></p>
           <div className="flex gaps align-center">
@@ -144,7 +145,7 @@ export class InstallChart extends Component<Props> {
     const panelControls = (
       <div className="install-controls flex gaps align-center">
         <span><Trans>Chart</Trans></span>
-        <Badge label={`${repo}/${name}`} title={_i18n._(t`Repo/Name`)}/>
+        <Badge label={`${repo}/${name}`} title={_i18n._(t`Repo/Name`)} />
         <span><Trans>Version</Trans></span>
         <Select
           className="chart-version"
@@ -174,11 +175,17 @@ export class InstallChart extends Component<Props> {
 
     return (
       <div className="InstallChart flex column">
-        <EditorPanel
-          tabId={tabId}
-          value={values}
-          onChange={this.onValuesChange}
-        />
+        <div className="flex gaps grid-12">
+          <EditorPanel
+            className="col-6"
+            tabId={tabId}
+            value={values}
+            onChange={this.onValuesChange}
+          />
+          <div className="col-6">
+            <MarkdownViewer markdown={this.chartData.description} />
+          </div>
+        </div>
         <InfoPanel
           tabId={tabId}
           controls={panelControls}
@@ -188,7 +195,7 @@ export class InstallChart extends Component<Props> {
           submittingMessage={_i18n._(t`Installing...`)}
           showSubmitClose={false}
         />
-      </div>
+      </div >
     );
   }
 }

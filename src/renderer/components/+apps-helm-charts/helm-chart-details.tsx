@@ -62,6 +62,7 @@ export class HelmChartDetails extends Component<Props> {
 
   @autobind()
   install() {
+    this.selectedChart.description = this.description
     createInstallChartTab(this.selectedChart);
     this.props.hideDetails()
   }

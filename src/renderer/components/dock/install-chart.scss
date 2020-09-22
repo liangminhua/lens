@@ -8,6 +8,12 @@
       min-width: 130px;
     }
   }
+  .EditorPanel{
+    @include custom-scrollbar(dark);
+  }
+  .MarkDownViewer{
+    @include custom-scrollbar(dark);
+  }
 }
 
 .InstallChartDone {
